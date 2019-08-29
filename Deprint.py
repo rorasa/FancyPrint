@@ -1,4 +1,4 @@
-class FancyPrint:
+class Deprint:
     """
     Print fancy terminal output.
     Supported on all ANSI/VT100 terminal emulators.
@@ -127,32 +127,32 @@ class FancyPrint:
         return self
 
 if __name__ == '__main__':
-    fp = FancyPrint()
+    dp = Deprint()
 
-    fp.clear()
-    fp.style('bold').print("FancyPrint - declarative Python fancy print statement")
-    fp.emptylines()
+    dp.clear()
+    dp.style('bold').print("Deprint - declarative Python fancy print statement")
+    dp.emptylines()
 
-    fp.print("Declarative style")
-    fp.print("fp.colour('blue').print('blue text'): ")
-    fp.colour('blue').print('blue text')
-    fp.print("fp.colour('red').style('underlined').print('red underlined text'): ")
-    fp.colour('red').style('underlined').print('red underlined text')
-    fp.print("fp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background'): ")
-    fp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background')
+    dp.print("Declarative style")
+    dp.print("dp.colour('blue').print('blue text'): ")
+    dp.colour('blue').print('blue text')
+    dp.print("dp.colour('red').style('underlined').print('red underlined text'): ")
+    dp.colour('red').style('underlined').print('red underlined text')
+    dp.print("dp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background'): ")
+    dp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background')
 
-    fp.emptylines()
-    fp.print("Persistent style")
-    fp.print("fp.setColour('blue')")
-    fp.print("fp.print('blue text')")
-    fp.setColour('blue')
-    fp.print('blue text')
+    dp.emptylines()
+    dp.print("Persistent style")
+    dp.print("dp.setColour('blue')")
+    dp.print("dp.print('blue text')")
+    dp.setColour('blue')
+    dp.print('blue text')
     print("normal print is also blue!")
-    fp.reset()
-    fp.print("fp.setColour('red')")
-    fp.print("fp.setStyle('underlined')")
-    fp.print("fp.print('red underlined text')")
-    fp.setColour('red')
-    fp.setStyle('underlined')
-    fp.print('red underlined text')
-    fp.reset()
+    dp.reset()
+    dp.print("dp.setColour('red')")
+    dp.print("dp.setStyle('underlined')")
+    dp.print("dp.print('red underlined text')")
+    dp.setColour('red')
+    dp.setStyle('underlined')
+    dp.print('red underlined text')
+    dp.reset()
