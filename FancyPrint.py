@@ -49,7 +49,7 @@ class FancyPrint:
             "reset": "\033[49m" 
         }
 
-        self.style = {
+        self.text_style = {
             "bold": "\033[1m",
             "dim": "\033[2m",
             "underlined": "\033[4m",
@@ -60,37 +60,92 @@ class FancyPrint:
             "reset": "\033[0m"
         }
 
+        self.persistent = False
+        self.oneliner = False
+
     def clear(self):
         print("\033[H\033[J", end = '')
+        return self
+
+    def emptylines(self, num=1):
+        print("".join(["\n" for i in range(0, num)]), end = '')
+        return self       
 
     def reset(self):
         self.setColour('reset')
         self.setBackground('reset')
         self.setStyle('reset')
+        self.persistent = False
+        self.oneliner = False
+        return self
 
     def print(self, text):
-        print(text)
+        if self.oneliner:
+            print(text, end = '')
+        else:
+            print(text)
 
-    def screenPrint(self, texts):
-        self.clear()
-        for text in texts:
-            self.print(text)
+        if not self.persistent:
+            self.reset()
 
     def setColour(self, colour):
+        self.persistent = True
         print(self.fg_colour[colour], end = '')
 
     def setBackground(self, colour):
+        self.persistent = True
         print(self.bg_colour[colour], end = '')
 
     def setStyle(self, style):
-        print(self.style[style], end = '')
+        self.persistent = True
+        print(self.text_style[style], end = '')
 
-fancy = FancyPrint()
-fancy.clear()
-fancy.setColour("red")
-fancy.print("Hello red world!")
-fancy.setBackground("blue")
-fancy.setColour("white")
-fancy.print("Hello blue sea!")
-fancy.reset()
-fancy.print("Welcome back mortals!")
+    def colour(self, colour):
+        self.persistent = False
+        print(self.fg_colour[colour], end = '')
+        return self
+
+    def bg(self, colour):
+        self.persistent = False
+        print(self.bg_colour[colour], end = '')
+        return self 
+
+    def style(self, style):
+        self.persistent = False
+        print(self.text_style[style], end = '')
+        return self
+
+    def hold(self):
+        self.persistent = False
+        self.oneliner = True
+        return self
+
+if __name__ == '__main__':
+    fp = FancyPrint()
+
+    fp.clear()
+    fp.style('bold').print("FancyPrint - declarative Python fancy print statement")
+    fp.emptylines()
+
+    fp.print("Declarative style")
+    fp.print("fp.colour('blue').print('blue text'): ")
+    fp.colour('blue').print('blue text')
+    fp.print("fp.colour('red').style('underlined').print('red underlined text'): ")
+    fp.colour('red').style('underlined').print('red underlined text')
+    fp.print("fp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background'): ")
+    fp.colour('white').bg('cyan').style('bold').print('white bold text on cyan background')
+
+    fp.emptylines()
+    fp.print("Persistent style")
+    fp.print("fp.setColour('blue')")
+    fp.print("fp.print('blue text')")
+    fp.setColour('blue')
+    fp.print('blue text')
+    print("normal print is also blue!")
+    fp.reset()
+    fp.print("fp.setColour('red')")
+    fp.print("fp.setStyle('underlined')")
+    fp.print("fp.print('red underlined text')")
+    fp.setColour('red')
+    fp.setStyle('underlined')
+    fp.print('red underlined text')
