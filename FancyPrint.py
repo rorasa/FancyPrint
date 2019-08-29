@@ -89,25 +89,31 @@ class FancyPrint:
             self.reset()
 
     def setColour(self, colour):
+        self.colour(colour)
         self.persistent = True
-        print(self.fg_colour[colour], end = '')
 
     def setBackground(self, colour):
+        self.bg(colour)
         self.persistent = True
-        print(self.bg_colour[colour], end = '')
 
     def setStyle(self, style):
+        self.style(style)
         self.persistent = True
-        print(self.text_style[style], end = '')
 
     def colour(self, colour):
         self.persistent = False
-        print(self.fg_colour[colour], end = '')
+        if str(colour).isdigit():
+            print("\033[38;5;{}m".format(colour), end = '')
+        else:
+            print(self.fg_colour[colour], end = '')
         return self
 
     def bg(self, colour):
         self.persistent = False
-        print(self.bg_colour[colour], end = '')
+        if str(colour).isdigit():
+            print("\033[48;5;{}m".format(colour), end = '')
+        else:
+            print(self.bg_colour[colour], end = '')
         return self 
 
     def style(self, style):
@@ -149,3 +155,4 @@ if __name__ == '__main__':
     fp.setColour('red')
     fp.setStyle('underlined')
     fp.print('red underlined text')
+    fp.reset()
