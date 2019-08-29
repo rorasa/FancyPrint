@@ -7,7 +7,7 @@ with open('README.md', encoding="utf-8") as f:
 setup(
   name = 'deprint',
   packages = ['deprint'],
-  version = '0.1',
+  version = '0.2',
   license='MIT',
   description = 'Declarative Python fancy print statement',
   long_description = long_description,
@@ -15,7 +15,7 @@ setup(
   author = 'Wattanit Hotrakool',
   author_email = 'wattanit@protonmail.com',
   url = 'https://github.com/rorasa/deprint',
-  download_url = 'https://github.com/rorasa/deprint/archive/v_01.tar.gz',
+  download_url = 'https://github.com/rorasa/deprint/archive/v_02.tar.gz',
   keywords = ['declarative', 'print', 'fancy', 'color'],
   python_requires='>=3',
 #   install_requires=[ 
