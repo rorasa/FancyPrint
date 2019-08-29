@@ -1,15 +1,23 @@
 from distutils.core import setup
+import setuptools
+
+with open('README.md', encoding="utf-8") as f:
+    long_description = f.read()
+
 setup(
   name = 'deprint',
   packages = ['deprint'],
   version = '0.1',
   license='MIT',
   description = 'Declarative Python fancy print statement',
+  long_description = long_description,
+  long_description_content_type = "text/markdown",
   author = 'Wattanit Hotrakool',
   author_email = 'wattanit@protonmail.com',
   url = 'https://github.com/rorasa/deprint',
   download_url = 'https://github.com/rorasa/deprint/archive/v_01.tar.gz',
   keywords = ['declarative', 'print', 'fancy', 'color'],
+  python_requires='>=3',
 #   install_requires=[ 
 #       ],
   classifiers=[
